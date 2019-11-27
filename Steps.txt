@@ -1,0 +1,85 @@
+1. Crear carpeta del proyecto
+2. Crear carpeta src
+3. Crear index.html dentro de la carpeta src (opcion de indicar el script que debe ejecutar al cargar la pagina)
+4. Crear un archivo .js (por ejemplo App.js). Este sera el fichero js que se llame desde el index.html
+5. Añadir ficheros al proyecto y llamar a la terminal desde la carpeta del proyecto (comando npm):
+  a) npm init -> crea un package.json con la informacion del proyecto
+  b) Instalar Prettier -> npm install -D Prettier
+    (La D indica que se añade a la dependencia de desarrollo: devDependencies)
+  c) Añadir un archivo .prettierrc dentro de la carpeta del proyecto con {}
+  d) Añadir dentro de package.json:
+    1) "scripts":{"format": "prettier \"src/**/*.{js,html}\" --write"}
+      (asi prettier se ejecuta en todos los archivos js y html dentro de src)
+  e) Instalar Eslint -> npm install -D eslint eslint-congig-prettier
+    (para que no compruebe los espacios)
+  f) Añadir un archivo .eslintrc.json dentro de la carpeta del proyecto con:
+    {
+      "extends": ["eslint:recommended", "prettier", "prettier/react"],
+      "plugins": [],
+      "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      },
+      "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+      }
+    }
+  g) Añadir Scripts dentro de package.json con:
+    "scripts": {
+      "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    }
+  h) Añadir un archivo .gitignore dentro de la carpeta del proyecto (que se ignora al subir a git):
+    node_modules/
+    .cache/
+    dist/
+    coverage/
+    .env
+  i) Instalar Parcel desde la terminal con npm i -D parcel-bundler
+  j) Añadir al scripts de package.json:
+     "dev": "parcel src/index.html",
+  k) Instalar React y React-dom: npm i react react-dom
+  l) Instalar blockstack: npm i blockstack
+  m) Configurar Eslint para React (evita que salte un error al introducir HTML en el return):
+    npm i -D babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
+  n) Editar .eslintrc:
+    "extends":[
+      "plugin:import/errors",
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "rules":{
+      "react/prop-types": 0,
+      "no-console": 1
+    }
+    "plugins": ["react", "import", "jsx-a11y"],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  p) Configurar Babel para Parcel (para usar funcionalidades no incluidas en React)
+    npm i -D babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react
+  q) Crear un archivo .babelrc dentro de la carpeta del proyecto:
+      {
+        "presets": ["@babel/preset-react", "@babel/preset-env"],
+        "plugins": ["@babel/plugin-proposal-class-properties"]
+      }
+  r) Añadir en .eslintrc.json: "parser": "babel-eslint",
+  s) React Hooks:
+    eslintrc:
+      "rules": {
+        "react/prop-types": 0,
+        "no-console": 1,
+        "react-hooks/rules-of-hooks": 2,
+        "react-hooks/exhaustive-deps": 1
+      },
+      "plugins": ["react-hooks"],
+    npm i -D eslint-plugin-react-hooks
+    npm i -D cross-env
+    Añadir a package.json -> "dev:mock": "cross-env PET_MOCK=mock npm run dev"
+t) Añadir en package.json el navegador donde vas a lanzar la web ->   "browserslist": "last 2 Chrome versions"
